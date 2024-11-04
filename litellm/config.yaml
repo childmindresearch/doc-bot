@@ -1,10 +1,42 @@
 model_list:
-  - model_name: cohere-embed-english-v3
+  - model_name: Claude Sonnet 3.5 V2
+    litellm_params:
+      model: bedrock/anthropic.claude-3-5-sonnet-20241022-v2:0
+      aws_access_key_id: os.environ/AWS_ACCESS_KEY
+      aws_secret_access_key: os.environ/AWS_SECRET_ACCESS_KEY
+      aws_region_name: os.environ/AWS_REGION_NAME
+    model_info:
+      mode: chat-vision
+
+  - model_name: Cohere Embed English V3
     litellm_params:
       model: bedrock/cohere.embed-english-v3
       aws_access_key_id: os.environ/AWS_ACCESS_KEY
       aws_secret_access_key: os.environ/AWS_SECRET_ACCESS_KEY
       aws_region_name: os.environ/AWS_REGION_NAME
+    model_info:
+      mode: embedding
+
+  # Azure services has unique variables as they may need to be spread
+  # across multiple regions.
+
+  - model_name: Azure OpenAI TTS-1
+    litellm_params:
+      model: azure/tts-1
+      api_base: os.environ/AZURE_API_BASE_TTS
+      api_key: os.environ/AZURE_API_KEY_TTS
+      api_version: os.environ/AZURE_API_VERSION
+    model_info:
+      mode: audio_generation
+
+  - model_name: Azure Whisper
+    litellm_params:
+      model: azure/azure-whisper
+      api_base: os.environ/AZURE_API_BASE_WHISPER
+      api_key: os.environ/AZURE_API_KEY_WHISPER
+      api_version: os.environ/AZURE_API_VERSION
+    model_info:
+      mode: audio_transcription
 
 general_settings: 
   master_key: os.environ/LITELLM_KEY

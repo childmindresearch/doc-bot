@@ -7,17 +7,24 @@ services:
       - 4000:4000
     env_file:
       - .env
-    volumes:
-      - ./litellm/config.yaml:/app/config.yaml
     command: --config /app/config.yaml --detailed_debug
-    
+    develop:
+      watch:
+        - action: sync
+          path: ./litellm/config.yaml
+          target: /app/config.yaml
+        - action: rebuild
+          path: .env
+        - action: rebuild
+          path: docker-compose.yaml
+
   open_webui:
-    build:
-      context: open_webui
-      dockerfile: Dockerfile
+    image: ghcr.io/open-webui/open-webui
     ports:
       - 3000:8080
     env_file:
       - .env
+    volumes:
+      - ./.open-webui:/app/backend/data
     
   
