@@ -22,7 +22,7 @@ jobs:
     - name: Run tests
       id: run-tests
       run: >
-        uv run pytest proxy \
+        uv run pytest . \
           --junitxml=pytest.xml \
           --cov-report=term-missing:skip-covered \
           --cov-report=xml:coverage.xml \
@@ -54,4 +54,4 @@ jobs:
     - name: Install the project
       run: cd proxy && uv sync --all-extras --dev
     - name: Run mypy
-      run: cd proxy && uv run mypy .
+      run: uv run mypy .
