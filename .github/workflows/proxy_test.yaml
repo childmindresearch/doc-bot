@@ -18,11 +18,11 @@ jobs:
       with:
         python-version-file: "./proxy/.python-version"
     - name: Install the project
-      run: uv sync --all-extras --dev
+      run: cd proxy && uv sync --all-extras --dev
     - name: Run tests
       id: run-tests
       run: >
-        uv run pytest . \
+        uv run pytest proxy \
           --junitxml=pytest.xml \
           --cov-report=term-missing:skip-covered \
           --cov-report=xml:coverage.xml \
@@ -52,6 +52,6 @@ jobs:
       with:
         python-version-file: "./proxy/.python-version"
     - name: Install the project
-      run: uv sync --all-extras --dev
+      run: cd proxy && uv sync --all-extras --dev
     - name: Run mypy
-      run: uv run mypy .
+      run: cd proxy && uv run mypy .
