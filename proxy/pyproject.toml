@@ -11,6 +11,14 @@ dependencies = [
     "boto3>=1.35.54",
 ]
 
+[tool.uv]
+dev-dependencies = [
+    "pytest>=8.3.3",
+    "pytest-mock>=3.14.0",
+    "mypy>=1.13.0",
+    "ruff>=0.7.2",
+]
+
 
 [tool.isort]
 known_local_folder = ["app"]
@@ -77,8 +85,3 @@ indent-style = "space"
 skip-magic-trailing-comma = false
 line-ending = "auto"
 
-[tool.uv]
-dev-dependencies = [
-    "pytest>=8.3.3",
-    "pytest-mock>=3.14.0",
-]
