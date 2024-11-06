@@ -15,16 +15,32 @@ services:
           target: /app/config.yaml
         - action: rebuild
           path: .env
-        - action: rebuild
-          path: docker-compose.yaml
 
   open_webui:
-    image: ghcr.io/open-webui/open-webui
+    image: ghcr.io/open-webui/open-webui:dev
     ports:
       - 3000:8080
     env_file:
       - .env
     volumes:
       - ./.open-webui:/app/backend/data
+
+  ai_proxy:
+    build:
+      context: proxy  
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    env_file:
+      - .env
+    develop:
+      watch:
+        - action: rebuild
+          path: ./proxy/app
+          target: /app/app
+        - action: rebuild
+          path: ./proxy/uv.lock
+
+  
     
   

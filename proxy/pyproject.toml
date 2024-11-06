@@ -1,0 +1,84 @@
+[project]
+name = "app"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi[standard]>=0.115.4",
+    "pydantic>=2.9.2",
+    "pydantic-settings>=2.6.1",
+    "boto3>=1.35.54",
+]
+
+
+[tool.isort]
+known_local_folder = ["app"]
+
+[tool.mypy]
+ignore_missing_imports = true
+strict = true
+plugins = ["pydantic.mypy"]
+
+[tool.ruff]
+exclude = [
+  ".bzr",
+  ".direnv",
+  ".eggs",
+  ".git",
+  ".git-rewrite",
+  ".hg",
+  ".mypy_cache",
+  ".nox",
+  ".pants.d",
+  ".pytype",
+  ".ruff_cache",
+  ".svn",
+  ".tox",
+  ".venv",
+  "__pypackages__",
+  "_build",
+  "buck-out",
+  "build",
+  "dist",
+  "node_modules",
+  "venv"
+]
+line-length = 88
+indent-width = 4
+src = ["src"]
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+  "ANN101",  # self should not be annotated.
+  "ANN102",  # cls should not be annotated.
+  "B008" # Common in FastAPI to perform function call in a function call.
+]
+fixable = ["ALL"]
+unfixable = []
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = [
+  "S101",  # asserts should be used in pytest
+  "SLF001",  # accessing private members in tests is fine
+  "INP001"  # tests should not be a module
+]
+"local/**/*" = ["ALL"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
+[tool.uv]
+dev-dependencies = [
+    "pytest>=8.3.3",
+    "pytest-mock>=3.14.0",
+]
