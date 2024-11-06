@@ -3,7 +3,7 @@
 import json
 from collections.abc import Iterable
 
-import boto3  # type: ignore[import-untyped]
+import boto3
 import fastapi
 import pydantic
 from fastapi import status

@@ -9,6 +9,7 @@ dependencies = [
     "pydantic>=2.9.2",
     "pydantic-settings>=2.6.1",
     "boto3>=1.35.54",
+    "pytest-cov>=6.0.0",
 ]
 
 [tool.uv]
