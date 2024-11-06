@@ -1,9 +1,10 @@
 """Views for the embeddings router."""
 
 import fastapi
+from fastapi import status
+
 from app.core import config
 from app.routers.embeddings import controller, schemas
-from fastapi import status
 
 router = fastapi.APIRouter(
     prefix="/embeddings",

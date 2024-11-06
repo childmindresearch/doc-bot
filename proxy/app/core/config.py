@@ -22,7 +22,7 @@ class Settings(pydantic_settings.BaseSettings):
 @functools.lru_cache
 def get_settings() -> Settings:
     """Gets the app settings."""
-    return Settings()
+    return Settings()  # type: ignore[call-arg] # Arguments grabbed from environment.
 
 
 def get_logger() -> logging.Logger:

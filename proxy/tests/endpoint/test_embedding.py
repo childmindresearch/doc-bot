@@ -6,10 +6,11 @@ from typing import Any
 
 import pytest
 import pytest_mock
-from app.core import auth
-from app.main import app
 from fastapi import status
 from fastapi.testclient import TestClient
+
+from app.core import auth
+from app.main import app
 
 client = TestClient(app)
 

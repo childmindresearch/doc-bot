@@ -3,12 +3,13 @@
 import json
 from collections.abc import Iterable
 
-import boto3
+import boto3  # type: ignore[import-untyped]
 import fastapi
 import pydantic
+from fastapi import status
+
 from app.core import config
 from app.routers.embeddings import schemas
-from fastapi import status
 
 settings = config.get_settings()
 logger = config.get_logger()
@@ -23,7 +24,7 @@ def post_embedding(
         payload: The request body.
 
     Returns:
-        The embedding.
+        The embedding response.
     """
     if payload.provider == "aws":
         logger.debug("Running Azure Embedding.")
@@ -46,10 +47,14 @@ class CohereEmbeddingResponse:
 
 def _run_aws_embedding(
     payload: schemas.PostEmbeddingRequest,
-) -> CohereEmbeddingResponse:
-    """Runs an embedding on Azure.
+) -> schemas.PostEmbeddingResponse:
+    """Runs an embedding on AWS.
 
-    Assumes the model name is equivalent to the deployment name.
+    Args:
+        payload: The payload as provided to the POST embedding endpoint.
+
+    Returns:
+        The embedding response.
     """
     if isinstance(payload.input, str):
         payload.input = [payload.input]
@@ -82,10 +87,16 @@ def _run_aws_embedding(
     )
 
 
-def _get_cohere_response(
-    inputs: Iterable[str],
-    model: schemas.MODEL_NAME,
-) -> CohereEmbeddingResponse:
+def _get_cohere_response(inputs: Iterable[str], model: str) -> CohereEmbeddingResponse:
+    """Gets the AWS response for Cohere models.
+
+    Args:
+        inputs: List of strings to embed.
+        model: The model to use for embedding.
+
+    Returns:
+        The embedding response.
+    """
     body = json.dumps(
         {
             "texts": inputs,
