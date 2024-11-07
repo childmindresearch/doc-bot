@@ -5,6 +5,7 @@ from fastapi import status
 
 from app.core import auth, config
 from app.routers.embeddings import views as embeddings_views
+from app.routers.images import views as images_views
 
 logger = config.get_logger()
 
@@ -20,4 +21,6 @@ app = fastapi.FastAPI(
 
 version_router = fastapi.APIRouter(prefix="/v1")
 version_router.include_router(embeddings_views.router)
+version_router.include_router(images_views.router)
+
 app.include_router(version_router)
