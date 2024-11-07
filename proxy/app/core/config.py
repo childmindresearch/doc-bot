@@ -16,7 +16,7 @@ class Settings(pydantic_settings.BaseSettings):
     AWS_ACCESS_KEY: pydantic.SecretStr = pydantic.Field(...)
     AWS_SECRET_ACCESS_KEY: pydantic.SecretStr = pydantic.Field(...)
 
-    LOGGER_VERBOSITY: int = logging.INFO
+    LOGGER_VERBOSITY: int = logging.DEBUG
 
 
 @functools.lru_cache

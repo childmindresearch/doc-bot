@@ -6,9 +6,7 @@ from fastapi import status
 from app.core import config
 from app.routers.embeddings import controller, schemas
 
-router = fastapi.APIRouter(
-    prefix="/embeddings",
-)
+router = fastapi.APIRouter(prefix="/embeddings")
 
 logger = config.get_logger()
 

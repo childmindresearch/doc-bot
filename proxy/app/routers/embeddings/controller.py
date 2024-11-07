@@ -30,8 +30,8 @@ def post_embedding(
         logger.debug("Running Azure Embedding.")
         return _run_aws_embedding(payload)
     raise fastapi.HTTPException(
-        status.HTTP_400_BAD_REQUEST,
-        detail="Unknown model provider.",
+        status.HTTP_500_INTERNAL_SERVER_ERROR,
+        detail="Unknown provider.",
     )
 
 
