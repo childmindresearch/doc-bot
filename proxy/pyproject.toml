@@ -21,8 +21,9 @@ dev-dependencies = [
 ]
 
 
-[tool.isort]
-known_local_folder = ["app"]
+[tool.ruff.isort]
+known-first-party = ["app"]
+known-local-folder = ["app"]
 
 [tool.mypy]
 ignore_missing_imports = true
