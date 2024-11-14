@@ -10,6 +10,7 @@ dependencies = [
     "pydantic-settings>=2.6.1",
     "boto3>=1.35.54",
     "pytest-cov>=6.0.0",
+    "openai>=1.54.4",
 ]
 
 [tool.uv]

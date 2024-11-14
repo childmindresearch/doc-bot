@@ -10,11 +10,16 @@ import pydantic_settings
 class Settings(pydantic_settings.BaseSettings):
     """App settings."""
 
-    PROXY_KEY: pydantic.SecretStr = pydantic.Field(...)
+    PROXY_KEY: pydantic.SecretStr
 
-    AWS_REGION: str = pydantic.Field(...)
-    AWS_ACCESS_KEY: pydantic.SecretStr = pydantic.Field(...)
-    AWS_SECRET_ACCESS_KEY: pydantic.SecretStr = pydantic.Field(...)
+    AWS_REGION: str
+    AWS_ACCESS_KEY: pydantic.SecretStr
+    AWS_SECRET_ACCESS_KEY: pydantic.SecretStr
+
+    AZURE_EMBEDDING_ENDPOINT: pydantic.HttpUrl
+    AZURE_EMBEDDING_DEPLOYMENT: str
+    AZURE_EMBEDDING_API_KEY: pydantic.SecretStr
+    AZURE_EMBEDDING_API_VERSION: str
 
     LOGGER_VERBOSITY: int = logging.DEBUG
 

@@ -5,6 +5,7 @@ from collections.abc import Iterable
 
 import boto3
 import fastapi
+import openai
 import pydantic
 from fastapi import status
 
@@ -27,8 +28,11 @@ def post_embedding(
         The embedding response.
     """
     if payload.provider == "aws":
-        logger.debug("Running Azure Embedding.")
+        logger.debug("Running AWS Embedding.")
         return _run_aws_embedding(payload)
+    if payload.provider == "azure":
+        logger.debug("Running Azure Embedding.")
+        return _run_azure_embedding(payload)
     raise fastapi.HTTPException(
         status.HTTP_500_INTERNAL_SERVER_ERROR,
         detail="Unknown provider.",
@@ -120,3 +124,38 @@ def _get_cohere_response(inputs: Iterable[str], model: str) -> CohereEmbeddingRe
 
     response_body = json.loads(response.get("body").read())
     return CohereEmbeddingResponse(**response_body)
+
+
+def _run_azure_embedding(
+    payload: schemas.PostEmbeddingRequest,
+) -> schemas.PostEmbeddingResponse:
+    """Gets the Azure response for an OpenAI embedding model.
+
+    Args:
+        payload: The request sent by the user.
+
+    Returns:
+        The embedding response.
+    """
+    client = openai.AzureOpenAI(
+        azure_endpoint=str(settings.AZURE_EMBEDDING_ENDPOINT),
+        azure_deployment=settings.AZURE_EMBEDDING_DEPLOYMENT,
+        api_key=settings.AZURE_EMBEDDING_API_KEY.get_secret_value(),
+        api_version=settings.AZURE_EMBEDDING_API_VERSION,
+    )
+
+    openai_response = client.embeddings.create(
+        input=payload.input,
+        model=payload.model_name,
+    )
+
+    return schemas.PostEmbeddingResponse(
+        model=payload.model,
+        data=[
+            schemas.EmbeddingData(
+                index=embedding.index,
+                embedding=embedding.embedding,
+            )
+            for embedding in openai_response.data
+        ],
+    )

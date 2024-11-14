@@ -4,7 +4,7 @@ from typing import Literal
 
 import pydantic
 
-EMBEDDING_MODEL = Literal["aws/cohere.embed-english-v3"]
+EMBEDDING_MODEL = Literal["aws/cohere.embed-english-v3", "azure/text-embedding-3-large"]
 
 
 class PostEmbeddingRequest(pydantic.BaseModel):
