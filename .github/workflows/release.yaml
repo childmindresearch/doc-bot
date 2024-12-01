@@ -36,7 +36,7 @@ jobs:
           images: cmidair/doc-bot-litellm
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@v6.9.0
+        uses: docker/build-push-action@v6.10.0
         with:
           platforms: linux/amd64,linux/arm64
           context: ./litellm
@@ -73,7 +73,7 @@ jobs:
           images: cmidair/doc-bot-proxy
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@v6.9.0
+        uses: docker/build-push-action@v6.10.0
         with:
           platforms: linux/amd64,linux/arm64
           context: ./proxy
