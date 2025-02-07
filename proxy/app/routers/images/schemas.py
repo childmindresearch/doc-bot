@@ -6,7 +6,8 @@ from typing import Literal
 import pydantic
 
 IMAGE_GENERATION_MODELS = Literal[
-    "aws/stability.sd3-large-v1:0", "aws/stability.sd3-5-large-v1:0"
+    "aws/stability.sd3-large-v1:0",
+    "aws/stability.sd3-5-large-v1:0",
 ]
 
 

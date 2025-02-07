@@ -4,9 +4,9 @@ import fastapi
 from fastapi import status
 
 from app.core import auth, config
+from app.routers.audio import views as tts_views
 from app.routers.embeddings import views as embeddings_views
 from app.routers.images import views as images_views
-from app.routers.audio import views as tts_views
 
 logger = config.get_logger()
 

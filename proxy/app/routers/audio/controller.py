@@ -1,10 +1,11 @@
 """Controller for the embeddings endpoints."""
 
+import boto3
 import fastapi
 from fastapi import status
+
 from app.core import config
 from app.routers.audio import schemas
-import boto3
 
 settings = config.get_settings()
 logger = config.get_logger()
