@@ -22,7 +22,7 @@ model_list:
       model: azure_ai/DeepSeek-R1
       deployment: DeepSeek-R1
       api_base: os.environ/AZURE_API_BASE_DEEPSEEK_R1
-      api_key: os.environ/AZURE_API_KEY_DEEPSEE_KR1
+      api_key: os.environ/AZURE_API_KEY_DEEPSEEK_R1
       api_version: 2024-05-01-preview
 
   # Azure services has unique variables as they may need to be spread
