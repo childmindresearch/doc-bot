@@ -17,6 +17,13 @@ model_list:
     model_info:
       mode: chat-vision
 
+  - model_name: Llama 3.1 8B Instruct
+    litellm_params:
+      model: bedrock/meta.llama3-1-8b-instruct-v1:0
+      aws_access_key_id: os.environ/AWS_ACCESS_KEY
+      aws_secret_access_key: os.environ/AWS_SECRET_ACCESS_KEY
+      aws_region_name: os.environ/AWS_REGION_NAME
+
   - model_name: Llama 3.2 3B Instruct
     litellm_params:
       model: bedrock/us.meta.llama3-2-3b-instruct-v1:0
