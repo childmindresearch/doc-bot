@@ -1,4 +1,13 @@
 model_list:
+  - model_name: Claude Sonnet 4.0
+    litellm_params:
+      model: bedrock/anthropic.claude-sonnet-4-20250514-v1:0
+      aws_access_key_id: os.environ/AWS_ACCESS_KEY
+      aws_secret_access_key: os.environ/AWS_SECRET_ACCESS_KEY
+      aws_region_name: os.environ/AWS_REGION_NAME
+    model_info:
+      mode: chat-vision
+      
   - model_name: Claude Sonnet 3.7
     litellm_params:
       model: bedrock/us.anthropic.claude-3-7-sonnet-20250219-v1:0
