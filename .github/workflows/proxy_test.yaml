@@ -57,7 +57,7 @@ jobs:
     - name: Install uv
       uses: astral-sh/setup-uv@557e51de59eb14aaaba2ed9621916900a91d50c6
     - name: Set up Python
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@5a1091511ad55cbe89839c7260b706298ca349f7
       with:
         python-version-file: "./proxy/.python-version"
     - name: Install the project
