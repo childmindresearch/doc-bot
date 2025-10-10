@@ -1,6 +1,6 @@
 # Software Architecture
 
-The architecture of Doc-Bot involves three separate containers: https://github.com/open-webui/open-webui, https://github.com/BerriAI/litellm, and a custom proxy server https://github.com/childmindresearch/doc-bot. Open WebUI serves as the frontend as well as basic backend processing for the chatbot. LiteLLM and the custom proxy server fulfill the same role: to provide an OpenAI-compliant adapter to other AI models. This is needed as Open WebUI sends out requests in OpenAI’s format. The custom proxy is there to cover models not supported well by LiteLLM; if LiteLLM supports all models we need, the custom proxy may be dropped. For persistence, the storage of Open WebUI is hosted in Azure File Storage. 
+The architecture of Doc-Bot involves three separate containers: https://github.com/open-webui/open-webui, https://github.com/BerriAI/litellm, and a custom proxy server https://github.com/childmindresearch/doc-bot. Open WebUI serves as the frontend as well as basic backend processing for the chatbot. LiteLLM and the custom proxy server fulfill the same role: to provide an OpenAI-compliant adapter to other AI models. This is needed as Open WebUI sends out requests in OpenAI’s format. The custom proxy is there to cover models not supported well by LiteLLM; if LiteLLM supports all models we need, the custom proxy may be dropped. For persistence, the storage of Open WebUI is hosted in Azure File Storage and Postgres. 
 
 ```mermaid
 graph TD
@@ -11,11 +11,13 @@ graph TD
   end
   azure_openai[Azure OpenAI]
   azure_storage[Azure File Storage]
+  azure_postgres[Azure Postgres]
   aws[AWS Bedrock]
   
   openwebui --> litellm
   openwebui --> proxy
   openwebui --> azure_storage
+  openwebui --> azure_postgres
   proxy --> aws
   litellm --> azure_openai
   litellm --> aws
@@ -29,3 +31,4 @@ The deployment consists of a container apps environment containing all aforement
 The LiteLLM container is a custom container based on the public LiteLLM container, but we built our `config.yaml` into this container. The proxy is also a custom container. The Open WebUI container is sourced directly from the Open WebUI repository. 
 
 At the time of writing, the appropriate scaling of the containers is still unknown. Given the monolithic structure of Open WebUI, I’d expect that vertical scaling should be preferred. The other containers should be scalable in either direction.
+
