@@ -1,4 +1,13 @@
 model_list:
+  - model_name: Claude Opus 4.6
+    litellm_params:
+      model: bedrock/anthropic.claude-opus-4-6-v1
+      aws_access_key_id: os.environ/AWS_ACCESS_KEY
+      aws_secret_access_key: os.environ/AWS_SECRET_ACCESS_KEY
+      aws_region_name: os.environ/AWS_REGION_NAME
+    model_info:
+      mode: chat-vision
+      
   - model_name: (NO BAA) GPT 4o Mini
     litellm_params:
       model: openrouter/openai/gpt-4o-mini
